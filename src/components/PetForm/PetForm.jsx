@@ -1,22 +1,24 @@
 import { useState } from 'react';
 
 const PetForm = (props) => {
-  // formData state to control the form.
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     breed: '',
   });
 
-  // handleChange function to update formData state.
   const handleChange = (evt) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-  // And finally, the form itself.
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.handleAddPet(formData);
+  };
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name"> Name: </label>
         <input
           id="name"
